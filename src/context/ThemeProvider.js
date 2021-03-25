@@ -1,4 +1,4 @@
-import { createContext,useReducer, useState} from "react";
+import { createContext, useReducer, useState } from "react";
 import ThemeReducer from "./ThemeReducer";
 
 const themeState = {
@@ -8,20 +8,26 @@ const themeState = {
 
 export const ThemeContext = createContext(themeState);
 
+const ThemeProvider = ({ children }) => {
+  const [dark, setDark] = useState(false);
 
- const ThemeProvider=({children})=> {
-  const [dark, setDark] = useState(false)
-  
   const toggleDark = (currentTheme) => {
-    if(dark !==currentTheme){
-      setDark(currentTheme)
+    if (dark !== currentTheme) {
+      setDark(currentTheme);
     }
-  }
-    return( <ThemeContext.Provider value={{
-        dark, toggleDark,
-    }}>
-      {children}
-    </ThemeContext.Provider>)
-  }
+  };
+  return (
+    <ThemeContext.Provider
+      value={{
+        dark,
+        toggleDark,
+      }}
+      displayName="ThemeContext"
+    >
 
-export default ThemeProvider
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export default ThemeProvider;
