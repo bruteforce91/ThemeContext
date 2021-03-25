@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { ThemeContext } from "./context/ThemeProvider";
+import { useContext } from "react";
 
 function App() {
+  const { dark, toggleDark } = useContext(ThemeContext);
+  console.log("dark", dark);
+  console.log("toggle", toggleDark);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={dark? "addDark":""}>
+        <h1 className={dark ? "addLightText":"title"}>{dark ? "Dark Mode":"Light Mode"}</h1>
+        <div className="wrapButton">
+          <input
+            onChange={() => toggleDark(!dark)}
+            type="checkbox"
+            className={dark? "toggle dark":"toggle"}
+            name="checkbox"
+          />
+        </div>
+      </div>
     </div>
   );
 }
