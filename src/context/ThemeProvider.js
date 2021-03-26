@@ -3,24 +3,28 @@ import ThemeReducer from "./ThemeReducer";
 
 const themeState = {
   dark: false,
-  toggleDark: () => {},
+  toggle: () => {},
 };
 
 export const ThemeContext = createContext(themeState);
 
 const ThemeProvider = ({ children }) => {
-  const [dark, setDark] = useState(false);
+ // const [dark, setDark] = useState(false);
+  const [state,dispatch]=useReducer(ThemeReducer,themeState)
+  
+  // const toggleDark = (currentTheme) => {
+  //   if (dark !== currentTheme) {
+  //     setDark(currentTheme);
+  //   }
+  // };
+  const toggle = () => 
+      dispatch({type:"toggleMode"})
+    
 
-  const toggleDark = (currentTheme) => {
-    if (dark !== currentTheme) {
-      setDark(currentTheme);
-    }
-  };
   return (
     <ThemeContext.Provider
       value={{
-        dark,
-        toggleDark,
+        state,toggle
       }}
       displayName="ThemeContext"
     >

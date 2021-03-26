@@ -3,18 +3,18 @@ import { ThemeContext } from "./context/ThemeProvider";
 import { useContext } from "react";
 
 function App() {
-  const { dark, toggleDark } = useContext(ThemeContext);
-  console.log("dark", dark);
-  console.log("toggle", toggleDark);
+  const { state, toggle } = useContext(ThemeContext);
+  // console.log("dark", dark);
+  // console.log("toggle", toggleDark);
   return (
     <div className="App">
-      <div className={dark? "addDark":""}>
-        <h1 className={dark ? "addLightText":"title"}>{dark ? "Dark Mode":"Light Mode"}</h1>
+      <div className={state.dark? "addDark":""}>
+        <h1 className={state.dark ? "addLightText":"title"}>{state.dark ? "Dark Mode":"Light Mode"}</h1>
         <div className="wrapButton">
           <input
-            onChange={() => toggleDark(!dark)}
+            onChange={() => toggle()}
             type="checkbox"
-            className={dark? "toggle dark":"toggle"}
+            className={state.dark? "toggle dark":"toggle"}
             name="checkbox"
           />
         </div>
